@@ -49,6 +49,34 @@ func (t Type) GoCType() string {
 // GoType returns the Go definition of the type.
 func (t Type) GoType() string {
 	switch t.Name {
+	// EGL types
+	case "EGLDisplay":
+		return t.pointers() + "uintptr"
+	case "EGLSurface":
+		return t.pointers() + "uintptr"
+	case "EGLContext":
+		return t.pointers() + "uintptr"
+	case "EGLAttrib":
+		return t.pointers() + "uintptr"
+	case "EGLnsecsANDROID":
+		return t.pointers() + "int64"
+	case "EGLTime","EGLTimeKHR","EGLTimeNV":
+		return t.pointers() + "uint64"
+	case "EGLNativePixmapType","EGLNativeWindowType":
+		return t.pointers() + "uintptr"
+	case "EGLNativeFileDescriptorKHR":
+		return t.pointers() + "int32"
+	case "EGLBoolean":
+		return t.pointers() + "uint32"
+	case "EGLenum", "EGLbitfield":
+		return t.pointers() + "uint32"
+	case "EGLint":
+		return t.pointers() + "int32"
+	case "EGLuint64NV","EGLuint64KHR":
+		return t.pointers() + "uint64"
+	case "EGLNativeDisplayType":
+		return t.pointers() + "uintptr"
+	// OpenGL types
 	case "GLbyte":
 		return t.pointers() + "int8"
 	case "GLubyte":

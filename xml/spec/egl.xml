@@ -31,9 +31,12 @@
         <type name="NativePixmapType" requires="eglplatform"/>
         <type name="NativeWindowType" requires="eglplatform"/>
         <type>struct <name>AHardwareBuffer</name>;</type>
+        <type>typedef struct AHardwareBuffer <name>AHardwareBuffer</name>;</type>
         <type>struct <name>wl_buffer</name>;</type>
         <type>struct <name>wl_display</name>;</type>
+        <type>typedef struct wl_display <name>wl_display</name>;</type>
         <type>struct <name>wl_resource</name>;</type>
+        <type>typedef struct wl_resource <name>wl_resource</name>;</type>
         <!-- Dummy placeholders for non-EGL types -->
         <type name="Bool"/>
             <!-- These are actual EGL types.  -->
@@ -74,6 +77,7 @@
     EGLint iHeight;
     EGLint iStride;
 };</type>
+        <type>typedef struct EGLClientPixmapHI <name>EGLClientPixmapHI</name>;</type>
         <!-- Backwards-compatibility hack: Downstream implementations shipped
              incorrect function pointer names for some years. -->
         <type>typedef void (<apientry/> *<name>EGLDEBUGPROCKHR</name>)(EGLenum error,const char *command,EGLint messageType,EGLLabelKHR threadLabel,EGLLabelKHR objectLabel,const char* message);</type>
@@ -179,30 +183,55 @@
     </enums>
 
     <enums namespace="EGL" group="SpecialNumbers" vendor="ARB" comment="Tokens whose numeric value is intrinsically meaningful">
-        <enum value="EGL_CAST(EGLint,-1)" name="EGL_DONT_CARE"/>
-        <enum value="EGL_CAST(EGLint,-1)" name="EGL_UNKNOWN"/>
+        <enum value="-1" name="EGL_DONT_CARE"/>
+        <enum value="-1" name="EGL_UNKNOWN"/>
         <enum value="-1" name="EGL_NO_NATIVE_FENCE_FD_ANDROID"/>
         <enum value="0" name="EGL_DEPTH_ENCODING_NONE_NV"/>
-        <enum value="EGL_CAST(EGLContext,0)" name="EGL_NO_CONTEXT"/>
-        <enum value="EGL_CAST(EGLDeviceEXT,0)" name="EGL_NO_DEVICE_EXT"/>
-        <enum value="EGL_CAST(EGLDisplay,0)" name="EGL_NO_DISPLAY"/>
-        <enum value="EGL_CAST(EGLImage,0)" name="EGL_NO_IMAGE"/>
-        <enum value="EGL_CAST(EGLImageKHR,0)" name="EGL_NO_IMAGE_KHR"/>
-        <enum value="EGL_CAST(EGLNativeDisplayType,0)" name="EGL_DEFAULT_DISPLAY"/>
-        <enum value="EGL_CAST(EGLNativeFileDescriptorKHR,-1)" name="EGL_NO_FILE_DESCRIPTOR_KHR"/>
-        <enum value="EGL_CAST(EGLOutputLayerEXT,0)" name="EGL_NO_OUTPUT_LAYER_EXT"/>
-        <enum value="EGL_CAST(EGLOutputPortEXT,0)" name="EGL_NO_OUTPUT_PORT_EXT"/>
-        <enum value="EGL_CAST(EGLStreamKHR,0)" name="EGL_NO_STREAM_KHR"/>
-        <enum value="EGL_CAST(EGLSurface,0)" name="EGL_NO_SURFACE"/>
-        <enum value="EGL_CAST(EGLSync,0)" name="EGL_NO_SYNC"/>
-        <enum value="EGL_CAST(EGLSyncKHR,0)" name="EGL_NO_SYNC_KHR" alias="EGL_NO_SYNC"/>
-        <enum value="EGL_CAST(EGLSyncNV,0)" name="EGL_NO_SYNC_NV" alias="EGL_NO_SYNC"/>
-        <enum value="EGL_CAST(EGLConfig,0)" name="EGL_NO_CONFIG_KHR"/>
+        <enum value="uintptr(0)" name="EGL_NO_CONTEXT"/>
+        <enum value="uintptr(0)" name="EGL_NO_DEVICE_EXT"/>
+        <enum value="uintptr(0)" name="EGL_NO_DISPLAY"/>
+        <enum value="uintptr(0)" name="EGL_NO_IMAGE"/>
+        <enum value="uintptr(0)" name="EGL_NO_IMAGE_KHR"/>
+        <enum value="uintptr(0)" name="EGL_DEFAULT_DISPLAY"/>
+        <enum value="-1" name="EGL_NO_FILE_DESCRIPTOR_KHR"/>
+        <enum value="uintptr(0)" name="EGL_NO_OUTPUT_LAYER_EXT"/>
+        <enum value="uintptr(0)" name="EGL_NO_OUTPUT_PORT_EXT"/>
+        <enum value="uintptr(0)" name="EGL_NO_STREAM_KHR"/>
+        <enum value="uintptr(0)" name="EGL_NO_SURFACE"/>
+        <enum value="uintptr(0)" name="EGL_NO_SYNC"/>
+        <enum value="uintptr(0)" name="EGL_NO_SYNC_KHR" alias="EGL_NO_SYNC"/>
+        <enum value="uintptr(0)" name="EGL_NO_SYNC_NV" alias="EGL_NO_SYNC"/>
+        <enum value="uintptr(0)" name="EGL_NO_CONFIG_KHR"/>
         <enum value="10000" name="EGL_DISPLAY_SCALING"/>
         <enum value="0xFFFFFFFFFFFFFFFF" name="EGL_FOREVER" type="ull"/>
         <enum value="0xFFFFFFFFFFFFFFFF" name="EGL_FOREVER_KHR" type="ull" alias="EGL_FOREVER"/>
         <enum value="0xFFFFFFFFFFFFFFFF" name="EGL_FOREVER_NV" type="ull" alias="EGL_FOREVER"/>
     </enums>
+    <!--<enums namespace="EGL" group="SpecialNumbers" vendor="ARB" comment="Tokens whose numeric value is intrinsically meaningful">-->
+    <!--    <enum value="EGL_CAST(EGLint,-1)" name="EGL_DONT_CARE"/>-->
+    <!--    <enum value="EGL_CAST(EGLint,-1)" name="EGL_UNKNOWN"/>-->
+    <!--    <enum value="-1" name="EGL_NO_NATIVE_FENCE_FD_ANDROID"/>-->
+    <!--    <enum value="0" name="EGL_DEPTH_ENCODING_NONE_NV"/>-->
+    <!--    <enum value="EGL_CAST(EGLContext,0)" name="EGL_NO_CONTEXT"/>-->
+    <!--    <enum value="EGL_CAST(EGLDeviceEXT,0)" name="EGL_NO_DEVICE_EXT"/>-->
+    <!--    <enum value="EGL_CAST(EGLDisplay,0)" name="EGL_NO_DISPLAY"/>-->
+    <!--    <enum value="EGL_CAST(EGLImage,0)" name="EGL_NO_IMAGE"/>-->
+    <!--    <enum value="EGL_CAST(EGLImageKHR,0)" name="EGL_NO_IMAGE_KHR"/>-->
+    <!--    <enum value="EGL_CAST(EGLNativeDisplayType,0)" name="EGL_DEFAULT_DISPLAY"/>-->
+    <!--    <enum value="EGL_CAST(EGLNativeFileDescriptorKHR,-1)" name="EGL_NO_FILE_DESCRIPTOR_KHR"/>-->
+    <!--    <enum value="EGL_CAST(EGLOutputLayerEXT,0)" name="EGL_NO_OUTPUT_LAYER_EXT"/>-->
+    <!--    <enum value="EGL_CAST(EGLOutputPortEXT,0)" name="EGL_NO_OUTPUT_PORT_EXT"/>-->
+    <!--    <enum value="EGL_CAST(EGLStreamKHR,0)" name="EGL_NO_STREAM_KHR"/>-->
+    <!--    <enum value="EGL_CAST(EGLSurface,0)" name="EGL_NO_SURFACE"/>-->
+    <!--    <enum value="EGL_CAST(EGLSync,0)" name="EGL_NO_SYNC"/>-->
+    <!--    <enum value="EGL_CAST(EGLSyncKHR,0)" name="EGL_NO_SYNC_KHR" alias="EGL_NO_SYNC"/>-->
+    <!--    <enum value="EGL_CAST(EGLSyncNV,0)" name="EGL_NO_SYNC_NV" alias="EGL_NO_SYNC"/>-->
+    <!--    <enum value="EGL_CAST(EGLConfig,0)" name="EGL_NO_CONFIG_KHR"/>-->
+    <!--    <enum value="10000" name="EGL_DISPLAY_SCALING"/>-->
+    <!--    <enum value="0xFFFFFFFFFFFFFFFF" name="EGL_FOREVER" type="ull"/>-->
+    <!--    <enum value="0xFFFFFFFFFFFFFFFF" name="EGL_FOREVER_KHR" type="ull" alias="EGL_FOREVER"/>-->
+    <!--    <enum value="0xFFFFFFFFFFFFFFFF" name="EGL_FOREVER_NV" type="ull" alias="EGL_FOREVER"/>-->
+    <!--</enums>-->
 
     <enums namespace="EGL" start="0x3000" end="0x305F" vendor="KHR">
         <enum value="0x3000" name="EGL_SUCCESS"/>
@@ -959,8 +988,10 @@
     </enums>
 
     <enums namespace="EGL" start="0x3430" end="0x343F" vendor="ANDROID" comment="Reserved for Pablo Ceballos (Bug 15874)">
-        <enum value="EGL_CAST(EGLnsecsANDROID,-2)" name="EGL_TIMESTAMP_PENDING_ANDROID"/>
-        <enum value="EGL_CAST(EGLnsecsANDROID,-1)" name="EGL_TIMESTAMP_INVALID_ANDROID"/>
+        <!--<enum value="EGL_CAST(EGLnsecsANDROID,-2)" name="EGL_TIMESTAMP_PENDING_ANDROID"/>-->
+        <enum value="-2" name="EGL_TIMESTAMP_PENDING_ANDROID"/>
+        <!--<enum value="EGL_CAST(EGLnsecsANDROID,-1)" name="EGL_TIMESTAMP_INVALID_ANDROID"/>-->
+        <enum value="-1" name="EGL_TIMESTAMP_INVALID_ANDROID"/>
         <enum value="0x3430" name="EGL_TIMESTAMPS_ANDROID"/>
         <enum value="0x3431" name="EGL_COMPOSITE_DEADLINE_ANDROID"/>
         <enum value="0x3432" name="EGL_COMPOSITE_INTERVAL_ANDROID"/>
